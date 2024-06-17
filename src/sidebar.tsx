@@ -1,11 +1,11 @@
 import { sidebarProps } from "./types"
 
-export const Sidebar : React.FC<sidebarProps> =  ({active, selectSpeedHandler, selectBlocksHandler}) => {
+export const Sidebar : React.FC<sidebarProps> =  ({active, selectSpeedHandler, selectBlocksHandler, allRecords}) => {
   return  <div className='sidebar'>
     <div className='info'>
       <h5>Info</h5>
       <p>Arrow left/right : control</p>
-      <p>Enter : flip</p>
+      <p>Arrow Up : flip</p>
       <p>Arrow down : speed</p>
       <p>Space : set now</p>
     </div>
@@ -56,9 +56,30 @@ export const Sidebar : React.FC<sidebarProps> =  ({active, selectSpeedHandler, s
           id="speed5"
           value="5"
           disabled={active}
-          onChange = {selectSpeedHandler}      />
+          onChange = {selectSpeedHandler}    
+        />
         <label htmlFor="speed5">5</label>
+
       </div>
+
+      <div id="ScoreTable">
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>Record</td>
+          <td>Time</td>
+        </tr>
+        {allRecords.map((record) => {
+    return (<tr>
+      <th>{record.NamePlayer}</th>
+      <th>{record.score}</th>
+      <th>{(new Date(record.time)).toLocaleString()}</th>
+    </tr>
+    )})}
+  
+      </table>
+
+    </div>
 
       <div className='blocks-settings'>
 
@@ -106,7 +127,8 @@ export const Sidebar : React.FC<sidebarProps> =  ({active, selectSpeedHandler, s
 
       </div>
     </div>
-
     <div className='Link'>GitHub - <a href="https://github.com/volodya0/tetris">https://github.com/volodya0/tetris</a></div>
   </div>
+
+  
 }

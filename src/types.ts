@@ -32,6 +32,14 @@ export interface sidebarProps {
   active : boolean
   selectSpeedHandler : (e : React.ChangeEvent<HTMLInputElement>) => void
   selectBlocksHandler : (e : React.ChangeEvent<HTMLInputElement>) => void
+  allRecords: record[]
 }
+export interface record {
+  NamePlayer : string,
+  score : number, 
+  time: number,
+}
+
+
 
   

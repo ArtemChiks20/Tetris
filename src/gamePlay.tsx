@@ -2,7 +2,7 @@
 import { CreateElement } from "./createElement"
 import React, {useEffect, useState } from "react"
 import uniqid from 'uniqid'
-import { field, cords, configuration } from './types' 
+import { field, cords, configuration, record } from './types' 
 import { Sidebar } from "./sidebar"
 
 const configInit : configuration = {
@@ -13,6 +13,8 @@ const configInit : configuration = {
   step : 2,
   blocks : new Set(['Cube', 'Line', 'T', 'L', 'Z', 'U'])
 }
+
+let allRecords: record[] = []
 
 export const GamePlay = () => {
 
@@ -69,12 +71,25 @@ export const GamePlay = () => {
     setState(initial)
     setScore(0)
   }
-  
+
+  let NamePlayer = '';
+
   const onLose = () : void => {
     setActive(false)
     alert('you score : '+ score)
+    NamePlayer = prompt('Your name?')!;
+    let newRecord: record = {
+      NamePlayer : NamePlayer,
+      score : score, 
+      time: Date.now(),
+    }
+    console.log(newRecord)
+    allRecords.push(newRecord);
+    console.log(allRecords);
     reset()
   }
+  
+
 
   const setBlocks = (arr : cords[], color : string) : void => {
     let removed = 0
@@ -101,8 +116,7 @@ export const GamePlay = () => {
     }else{
       return false
     }
-  }
-
+  } 
   return <div className='container'>
   <div className="game-container b" id = 'game-container'>
     <div className='spawn-element b'>
@@ -114,6 +128,7 @@ export const GamePlay = () => {
         active={active}
       />
     </div>
+   
     <div>{state.map(row => <Row row={row} key={uniqid()}/>)}</div>
     <button onClick={() => setActive(true)}>Start</button>
     <button onClick={reset}>Reset</button>
@@ -121,10 +136,13 @@ export const GamePlay = () => {
   </div>
    <Sidebar 
     active={active} 
+    allRecords={allRecords}
     selectSpeedHandler={selectSpeedHandler} 
     selectBlocksHandler={selectBlocksHandler}/>
   </div>
+  
 }
+
 
 const Score : React.FC<{count : number}> = ({count}) =>{
   useEffect(() => {
@@ -148,4 +166,6 @@ const Row : React.FC<{row : field[]}> = ({row}) => <div className='g-row'>
 const Field :  React.FC<{field : field}> = ({field}) =>  <div 
     className={field.isFill? 'field fill ' + field.color : 'field empty'}>
   </div>
+
+  
 

@@ -73,7 +73,7 @@ button{
   height: 40px;
   width: 70px;
   border-radius: 10px;
-  background-color: rgb(60, 142, 218);
+  background-color: #3c8eda;
   outline: none;
   box-shadow: none;
 }
@@ -109,7 +109,7 @@ button:focus{
 }
 
 .red{
-  background-color: rgb(170, 42, 19);
+  background-color: #aa2a13;
 }
 
 .score{
@@ -125,3 +125,26 @@ button:focus{
 .g-row{
   display: flex;
 }
+
+#ScoreTable{
+  position:fixed;
+  top: 40px;
+  right: 120px;
+  background-color: rgb(62, 62, 62);
+  border: 2px solid black;
+    border-radius: 10px;
+  th{
+    color: #3c8eda;
+    font-size: 20px;
+    padding: 10px;
+    border: 2px solid #000000;
+  }
+  td{
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color:#3c8eda;
+    font-size: 15px;
+    padding: 15px;
+  }
+}
+
